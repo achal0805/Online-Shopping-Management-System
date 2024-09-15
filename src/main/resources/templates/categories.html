@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories Management</title>
+    <style>
+        h4 {
+            background-color: rgb(210, 204, 204);
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            margin: 0 auto; /* Center align the table */
+            border-collapse: collapse; /* Remove default border spacing */
+            width: 80%; /* Adjust table width */
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc; /* Add bottom border for each row */
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td:last-child {
+            border-right: none; /* Remove right border for the last column */
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-delete {
+            background-color: #ff6666;
+            color: white;
+        }
+        .btn-update {
+            background-color: #66b3ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h4>Categories Management</h4>
+    <nav><a href="/admin/categories/addCategory" target="_self">AddButton</a></nav>
+    <table>
+        <thead>
+            <tr>
+                <tr th:each="category, iStat : ${categories}">
+            <th scope="row" th:text="${iStat.index + 1}">1</th>
+            <td th:text="${category.name}"></td>
+             <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a></td>
+</tr>
+        </tbody>
+        
+    </table>
+     <button onclick="history.back()">Previous</button>
+</body>
+</html>

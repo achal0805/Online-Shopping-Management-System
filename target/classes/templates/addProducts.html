@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .custom-file {
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .custom-file input[type="file"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .custom-file-label {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-file-label:hover {
+            background-color: #0056b3;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>Add a New Product</h3>
+    <form th:action="@{/admin/products/save}" th:object="${productDTO}" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="hidden" name="id"  th:field="*{product_id}">
+             <label for="product_name">Product Name</label>
+            <input type="text" required name="product_name" th:field="*{name}" id="product_name" placeholder="Product Name">
+<label for="category">Select Category</label>
+                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+				 
+              
+                        <option th:each="category :${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}" >
+                    </select>
+           
+            <label for="price">Price</label>
+            <input type="number" required name="price"  th:field="*{price}" id="price" placeholder="Price">
+
+            <label for="weight">Weight in grams</label>
+            <input type="number" required name="weight"  th:field="*{weight}" id="weight" placeholder="Weight">
+
+            <label for="description">Product Description</label>
+            <textarea rows="5" required name="description" id="description"></textarea>
+
+            <button type="submit">Submit</button>
+       <button onclick="history.back()">Previous</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

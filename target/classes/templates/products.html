@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 60px;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Categories Management</h4>
+        <nav><a href="/admin/products/addProducts" class="btn">Add Product</a></nav>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product, iStat : ${products}">
+                    <th scope="row" th:text="${iStat.index + 1}">1</th>
+                    <td th:text="${product.name}">Product Name</td>
+                    <td th:text="${product.category.name}">Category</td>
+                    <td th:text="${product.price}">Price</td>
+                    <td><a th:href="@{/admin/product/delete/{id}(id=${product.product_id})}" class="btn btn-danger">Delete</a></td>
+                    <td><a th:href="@{/admin/product/update/{id}(id=${product.product_id})}" class="btn btn-warning">Update</a></td>
+                </tr>
+            </tbody>
+        </table>
+         <button onclick="history.back()">Previous</button>
+    </div>
+</body>
+</html>
